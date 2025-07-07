@@ -6,14 +6,12 @@
     <title>Subscribe to C-Suite Stack</title>
     <link rel="shortcut icon" type="image/jpg" href="images/favicon.png"/> 
 
-
     <!-- Essential Open Graph Meta Tags -->
     <meta property="og:title" content="Subscribe to C-Suite Stack">
     <meta property="og:description" content="C-Suite Stack is an e-mail newsletter that helps leaders stay ahead of the curve on corporate digital communications.">
     <meta property="og:image" content="https://raw.githubusercontent.com/csuitestack/csuitestack.github.io/refs/heads/main/images/socialshare.png">
     <meta property="og:url" content="https://csuitestack.github.io/">
     
-
     <style>
         * {
             margin: 0;
@@ -25,281 +23,613 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
             overflow-x: hidden;
         }
 
+        /* Navigation */
         .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #22388a;
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #22388a 0%, #5c70a8 100%);
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            padding: 1.5rem 0;
-            z-index: 10;
-        }
-
-        .nav-container {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            max-height: 40px;
-            width: auto;
-        }
-
-        .split-screen {
-            display: flex;
-            flex: 1;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        .left-side {
-            width: 50%;
-            background: linear-gradient(135deg, #22388a 0%, #5c70a8 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            padding: 6rem 4rem 4rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .right-side {
-            width: 50%;
-            background: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6rem 4rem 4rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .divider {
-            position: absolute;
-            top: 0;
             bottom: 0;
-            left: 50%;
-            width: 100px;
-            transform: translateX(-50%);
-            z-index: 2;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:rgba(255,255,255,0.05);stop-opacity:1" /><stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:1" /></linearGradient></defs><circle cx="200" cy="200" r="300" fill="url(%23grad1)"/><circle cx="800" cy="600" r="400" fill="url(%23grad1)"/></svg>');
             pointer-events: none;
         }
 
-        .divider svg {
-            height: 100%;
-            width: 100px;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
         .hero-content {
-            max-width: 540px;
+            max-width: 800px;
             margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .subtitle {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .benefits-list {
-            margin-top: 2rem;
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .benefits-list li {
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.1rem;
-        }
-
-        .benefits-list li::before {
-            content: "✓";
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 24px;
-            font-size: 0.9rem;
-        }
-
-        .subscriber-count {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            display: inline-block;
-            margin-top: 2rem;
-            font-size: 0.9rem;
-        }
-
-        .form-container {
-            width: 100%;
-            max-width: 480px;
-            padding: 2rem;
             position: relative;
+            z-index: 2;
         }
 
-        .form-header {
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            background: #ff6b35;
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Value Proposition Section */
+        .value-props {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .value-props-container {
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
-            margin-bottom: 2rem;
         }
 
-        .form-header h2 {
-            font-size: 2rem;
+        .value-props h2 {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             color: #1a1a1a;
         }
 
-        .embed-container {
-            width: 100%;
+        .value-props .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .benefit-card {
+            padding: 2rem;
+            text-align: left;
+            border-radius: 12px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #22388a, #5c70a8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .benefit-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .social-proof-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-proof p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .company-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            opacity: 0.6;
+        }
+
+        .company-logo {
+            height: 40px;
+            filter: grayscale(100%);
+        }
+
+        .subscriber-stat {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-weight: 600;
+            color: #22388a;
+        }
+
+        /* Author Section */
+        .author-section {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .author-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .author-content {
+            padding: 2rem 0;
+        }
+
+        .author-quote {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #333;
+            font-style: italic;
+            position: relative;
+        }
+
+        .author-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: #22388a;
+            position: absolute;
+            left: -2rem;
+            top: -1rem;
+            font-family: Georgia, serif;
+        }
+
+        .author-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .author-title {
+            color: #22388a;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .author-bio {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Main Signup Section */
+        .signup-section {
+            background: linear-gradient(135deg, #1a2d6b 0%, #22388a 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .signup-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .signup-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .signup-section .section-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+
+        .form-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-container h3 {
+            color: #1a1a1a;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-container p {
+            color: #666;
+            margin-bottom: 2rem;
         }
 
         .embed-container iframe {
             width: 100%;
             height: 320px;
             border-radius: 8px;
+            border: none;
         }
 
-        .growth-chart {
-            position: absolute;
-            bottom: -80px;
-            right: -100px;
-            width: 200px;
-            height: 200px;
-            opacity: 0.1;
-            pointer-events: none;
+        .trust-signals {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #666;
         }
 
-        @media (max-width: 1024px) {
-            .left-side, .right-side {
-                padding: 6rem 2rem 4rem;
-            }
-
-            h1 {
-                font-size: 3rem;
-            }
-
-            .logo {
-                margin-left: 2rem;
-            }
-
-            .growth-chart {
-                width: 150px;
-                height: 150px;
-                right: -50px;
-                bottom: -60px;
-            }
+        /* Sample Content Preview */
+        .preview-section {
+            padding: 6rem 2rem;
+            background: #f8f9fa;
         }
 
+        .preview-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .preview-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .preview-section .section-subtitle {
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .newsletter-preview {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-header {
+            border-bottom: 2px solid #22388a;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #22388a;
+            margin-bottom: 0.5rem;
+        }
+
+        .newsletter-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-content h4 {
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .newsletter-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .split-screen {
-                flex-direction: column;
-                min-height: auto;
-            }
-
-            .left-side, .right-side {
-                width: 100%;
-                padding: 4rem 1.5rem;
-            }
-
-            .left-side {
-                text-align: center;
-            }
-
-            .benefits-list {
-                display: inline-block;
-                text-align: left;
-            }
-
-            h1 {
+            .hero h1 {
                 font-size: 2.5rem;
             }
 
-            .nav {
-                padding: 1rem 0;
+            .hero .subtitle {
+                font-size: 1.1rem;
             }
 
-            .logo {
-                margin-left: 1.5rem;
+            .value-props h2 {
+                font-size: 2rem;
             }
 
-            .divider {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .author-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .author-image {
+                width: 150px;
+                height: 150px;
+                justify-self: center;
+            }
+
+            .author-quote::before {
                 display: none;
             }
 
-            .growth-chart {
-                display: none;
+            .form-container {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+
+            .company-logos {
+                gap: 1.5rem;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
             }
         }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 6rem 1rem 4rem;
+            }
+
+            .value-props, .author-section, .signup-section, .preview-section {
+                padding: 4rem 1rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+        }
+
+        .company-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    opacity: 0.8;
+}
+
+.company-badge {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 0.8rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #374151;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.company-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.company-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    border-color: #22388a;
+}
+
+.company-badge:hover::before {
+    left: 100%;
+}
     </style>
 </head>
 <body>
     <nav class="nav">
         <div class="nav-container">
-            <img class="logo" src="images/header.png" alt="Newsletter Logo">
+            <a href="#" class="logo-text">C-Suite Stack</a>
         </div>
     </nav>
 
-    <div class="split-screen">
-        <div class="divider">
-            <svg viewBox="0 0 100 1000" preserveAspectRatio="none" fill="#ffffff">
-                <path d="M0,0 C40,300 60,700 0,1000 L100,1000 L100,0 Z" />
-            </svg>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Get tomorrow's corporate digital communications strategies today</h1>
+            <p class="subtitle">Join 500+ comms, public affairs and C-level leaders getting actionable tips delivered straight to their inbox.</p>
+            <a href="#signup" class="hero-cta">Get Strategic Intel</a>
         </div>
+    </section>
 
-        <div class="left-side">
-            <div class="hero-content">
-                <h1>Get smarter about corporate digital communications</h1>
-                <p class="subtitle">Join comms, public affairs and C-level leaders getting actionable tips delivered straight to their inbox.</p>
-                
-                <ul class="benefits-list">
-                    <li>Hand-curated examples and explainers</li>
-                    <li>Practical applications of AI in comms</li>
-					<li>Platform and algorithm updates</li>
-
-                </ul>
-
-                <div class="subscriber-count">✨ Exclusive access for leaders at notable firms </div>
+    <!-- Value Propositions -->
+    <section class="value-props">
+        <div class="value-props-container">
+            <h2>While competitors react, you'll anticipate</h2>
+            <p class="section-subtitle">Get the strategies Fortune 500 teams use before they become common knowledge</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Hand-curated examples and explainers</h3>
+                    <p>Deep dives into campaigns reverse engineering strategies and execution you can replicate.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤖</div>
+                    <h3>Practical applications of AI in communications</h3>
+                    <p>Clear use-cases for AI that factor in the higher stakes for getting it wrong in corporate communications.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3>Platform updates before they impact your metrics</h3>
+                    <p>Algorithm changes, policy updates, and new features analyzed for immediate strategic advantage.</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="right-side">
-            <div class="form-container">
-                <div class="form-header">
-                    <h2>Get Monthly Updates</h2>
-                    <p>Digital moves fast. Join the community today to stay ahead of the curve!</p>
+
+    <!-- Author Credibility -->
+    <section class="social-proof">
+        <div class="author-container">
+            <img class="author-image" src="images/author-headshot.jpeg" alt="Prash Sabharwal">
+            <div class="author-content">
+                <div class="author-quote">
+                I started C-Suite Stack after watching talented in-house communicators struggle with an increasingly digital landscape using advice designed for consumer PR. Corporate digital communications requires different strategies, different metrics, and different expertise. My aim is to bridge that gap with insights that actually work for precise stakeholder outreach.
                 </div>
+                <div class="author-name">Prash Sabharwal</div>
+                <div class="author-title">Founder @ C-Suite Stack | Adjunct Instructor @ USC Annenberg School for Communication and Journalism | Kellogg MBA </div>
+                <p class="author-bio">15+ years building measurable digital programs for corporates and executives.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Content Preview -->
+    <section class="preview-section">
+        <div class="preview-container">
+            <h2>See what you'll get</h2>
+            <p class="section-subtitle">Recent insights that subscribers received weeks before they went mainstream</p>
+            
+            <div class="newsletter-preview">
+                <div class="newsletter-header">
+                    <div class="newsletter-title">C-Suite Stack</div>
+                    <div class="newsletter-date">Recently Published Newsletters</div>
+                </div>
+                <div class="newsletter-content">
+                    <h4>🏛️ How OpenAI Lobbied Washington With Targeted Thought Leadership</h4>
+                    <p>The sophisticated campaign combined in-person events and digital to influence policy stakeholders...</p>
+                    
+                    <h4>👨‍🏫 How a Yale professor went viral on LinkedIn with just a text PDF</h4>
+                    <p>A Yale finance professor defied social media norms by going viral on LinkedIn with a text-only PDF of his course syllabus...</p>
+                    
+                    <h4>📊 Communicators who ignore this platform are in for a surprise in 2025</h4>
+                    <p>How to prepare for when your brand hits the front page of the internet...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Signup -->
+    <section class="signup-section" id="signup">
+        <div class="signup-container">
+            <h2>Stop reacting. Start anticipating.</h2>
+            <p class="section-subtitle">Join communication leaders who see disruption coming and position their companies to win.</p>
+            
+            <div class="form-container">
+                <h3>Get Access to Digital Intel</h3>
+                <p>Monthly strategic insights delivered directly to your inbox</p>
+                
                 <div class="embed-container">
                     <iframe 
                         src="https://embeds.beehiiv.com/7405348a-fb60-4b95-8b7f-ac767daabab8" 
                         data-test-id="beehiiv-embed" 
                         frameborder="0" 
-                        scrolling="no" 
-                        style="border-radius: 8px; border: 2px solid #e5e7eb; margin: 0; background-color: transparent;">
+                        scrolling="no">
                     </iframe>
                 </div>
-
+                
+                <div class="trust-signals">
+                    🔒 No spam. Unsubscribe anytime.
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 </body>
 </html>
