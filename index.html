@@ -24,6 +24,41 @@
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Scroll Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         /* Navigation */
@@ -54,12 +89,20 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #22388a 0%, #5c70a8 100%);
+            background: linear-gradient(135deg, #22388a 0%, #5c70a8 50%, #22388a 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
             color: white;
             padding: 8rem 2rem 6rem;
             text-align: center;
             position: relative;
             overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .hero::before {
@@ -71,6 +114,12 @@
             bottom: 0;
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:rgba(255,255,255,0.05);stop-opacity:1" /><stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:1" /></linearGradient></defs><circle cx="200" cy="200" r="300" fill="url(%23grad1)"/><circle cx="800" cy="600" r="400" fill="url(%23grad1)"/></svg>');
             pointer-events: none;
+            animation: floatPattern 20s ease-in-out infinite;
+        }
+
+        @keyframes floatPattern {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
         }
 
         .hero-content {
@@ -85,6 +134,18 @@
             font-weight: 700;
             margin-bottom: 1.5rem;
             line-height: 1.1;
+            animation: fadeInDown 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero .subtitle {
@@ -94,26 +155,46 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 0.9;
+                transform: translateY(0);
+            }
         }
 
         .hero-cta {
-            background: #ff6b35;
+            background: #10b981;
             color: white;
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 3rem;
             border: none;
             border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: fadeInUp 1s ease 0.6s both;
+            letter-spacing: 0.3px;
         }
 
         .hero-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(255, 107, 53, 0.4);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            background: #059669;
+        }
+
+        .hero-cta:active {
+            transform: translateY(-1px) scale(1.02);
         }
 
         /* Value Proposition Section */
@@ -131,7 +212,11 @@
         .value-props h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: #1a1a1a;
+            background: linear-gradient(135deg, #22388a 0%, #5c70a8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
         }
 
         .value-props .section-subtitle {
@@ -153,13 +238,36 @@
         .benefit-card {
             padding: 2rem;
             text-align: left;
-            border-radius: 12px;
-            background: #f8f9fa;
-            transition: transform 0.3s ease;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(34, 56, 138, 0.05) 0%, rgba(92, 112, 168, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .benefit-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(34, 56, 138, 0.15);
+            border-color: rgba(34, 56, 138, 0.2);
+        }
+
+        .benefit-card:hover::before {
+            opacity: 1;
         }
 
         .benefit-icon {
@@ -173,6 +281,14 @@
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
             color: white;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(34, 56, 138, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover .benefit-icon {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 12px 30px rgba(34, 56, 138, 0.4);
         }
 
         .benefit-card h3 {
@@ -251,7 +367,14 @@
             height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 50px rgba(34, 56, 138, 0.25);
+            border: 4px solid rgba(255, 255, 255, 0.9);
+            transition: all 0.4s ease;
+        }
+
+        .author-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(34, 56, 138, 0.35);
         }
 
         .author-content {
@@ -297,58 +420,90 @@
 
         /* Main Signup Section */
         .signup-section {
-            background: linear-gradient(135deg, #1a2d6b 0%, #22388a 100%);
+            background: linear-gradient(135deg, #1a2d6b 0%, #22388a 50%, #1a2d6b 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
             color: white;
-            padding: 6rem 2rem;
+            padding: 4rem 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signup-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .signup-container {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         .signup-section h2 {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 2;
         }
 
         .signup-section .section-subtitle {
             font-size: 1.2rem;
             opacity: 0.9;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .form-container {
-            background: white;
-            padding: 3rem;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.25);
             max-width: 500px;
             margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .form-container:hover {
+            box-shadow: 0 40px 100px rgba(0,0,0,0.3);
         }
 
         .form-container h3 {
             color: #1a1a1a;
             font-size: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .form-container p {
             color: #666;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
         }
 
         .embed-container iframe {
             width: 100%;
-            height: 320px;
+            height: 200px;
             border-radius: 8px;
             border: none;
         }
 
         .trust-signals {
-            margin-top: 2rem;
-            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
             color: #666;
         }
 
@@ -367,7 +522,11 @@
         .preview-section h2 {
             font-size: 2.2rem;
             margin-bottom: 1rem;
-            color: #1a1a1a;
+            background: linear-gradient(135deg, #22388a 0%, #5c70a8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
         }
 
         .preview-section .section-subtitle {
@@ -377,12 +536,19 @@
 
         .newsletter-preview {
             background: white;
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
             text-align: left;
             max-width: 600px;
             margin: 0 auto;
+            border: 1px solid rgba(34, 56, 138, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .newsletter-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.15);
         }
 
         .newsletter-header {
@@ -522,6 +688,28 @@
     left: 100%;
 }
     </style>
+    <script>
+        // Scroll Animation Observer
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with fade-in classes
+            document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
 </head>
 <body>
     <nav class="nav">
@@ -539,24 +727,50 @@
         </div>
     </section>
 
+    <!-- Main Signup -->
+    <section class="signup-section" id="signup">
+        <div class="signup-container">
+            <h2>Stop reacting. Start anticipating.</h2>
+            <p class="section-subtitle">Join communication leaders who see disruption coming and position their companies to win.</p>
+
+            <div class="form-container">
+                <h3>Get Access to Digital Intel</h3>
+                <p>Monthly strategic insights delivered directly to your inbox</p>
+
+                <div class="embed-container">
+                    <iframe
+                        src="https://embeds.beehiiv.com/7405348a-fb60-4b95-8b7f-ac767daabab8"
+                        data-test-id="beehiiv-embed"
+                        frameborder="0"
+                        scrolling="no">
+                    </iframe>
+                </div>
+
+                <div class="trust-signals">
+                    🔒 No spam. Unsubscribe anytime.
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Value Propositions -->
     <section class="value-props">
         <div class="value-props-container">
-            <h2>While competitors react, you'll anticipate</h2>
-            <p class="section-subtitle">Get the strategies Fortune 500 teams use before they become common knowledge</p>
-            
+            <h2 class="fade-in">While competitors react, you'll anticipate</h2>
+            <p class="section-subtitle fade-in">Get the strategies Fortune 500 teams use before they become common knowledge</p>
+
             <div class="benefits-grid">
-                <div class="benefit-card">
+                <div class="benefit-card fade-in">
                     <div class="benefit-icon">🎯</div>
                     <h3>Hand-curated examples and explainers</h3>
                     <p>Deep dives into campaigns reverse engineering strategies and execution you can replicate.</p>
                 </div>
-                <div class="benefit-card">
+                <div class="benefit-card fade-in">
                     <div class="benefit-icon">🤖</div>
                     <h3>Practical applications of AI in communications</h3>
                     <p>Clear use-cases for AI that factor in the higher stakes for getting it wrong in corporate communications.</p>
                 </div>
-                <div class="benefit-card">
+                <div class="benefit-card fade-in">
                     <div class="benefit-icon">📈</div>
                     <h3>Platform updates before they impact your metrics</h3>
                     <p>Algorithm changes, policy updates, and new features analyzed for immediate strategic advantage.</p>
@@ -569,8 +783,8 @@
     <!-- Author Credibility -->
     <section class="social-proof">
         <div class="author-container">
-            <img class="author-image" src="images/author-headshot.jpeg" alt="Prash Sabharwal">
-            <div class="author-content">
+            <img class="author-image fade-in-left" src="images/author-headshot.jpeg" alt="Prash Sabharwal">
+            <div class="author-content fade-in-right">
                 <div class="author-quote">
                 I started C-Suite Stack after watching talented in-house communicators struggle with an increasingly digital landscape using advice designed for consumer PR. Corporate digital communications requires different strategies, different metrics, and different expertise. My aim is to bridge that gap with insights that actually work for precise stakeholder outreach.
                 </div>
@@ -584,10 +798,10 @@
     <!-- Sample Content Preview -->
     <section class="preview-section">
         <div class="preview-container">
-            <h2>See what you'll get</h2>
-            <p class="section-subtitle">Recent insights that subscribers received weeks before they went mainstream</p>
-            
-            <div class="newsletter-preview">
+            <h2 class="fade-in">See what you'll get</h2>
+            <p class="section-subtitle fade-in">Recent insights that subscribers received weeks before they went mainstream</p>
+
+            <div class="newsletter-preview fade-in">
                 <div class="newsletter-header">
                     <div class="newsletter-title">C-Suite Stack</div>
                     <div class="newsletter-date">Recently Published Newsletters</div>
@@ -606,25 +820,25 @@
         </div>
     </section>
 
-    <!-- Main Signup -->
-    <section class="signup-section" id="signup">
+    <!-- Final CTA -->
+    <section class="signup-section">
         <div class="signup-container">
-            <h2>Stop reacting. Start anticipating.</h2>
-            <p class="section-subtitle">Join communication leaders who see disruption coming and position their companies to win.</p>
-            
-            <div class="form-container">
+            <h2 class="fade-in">Ready to stay ahead?</h2>
+            <p class="section-subtitle fade-in">Join 500+ leaders getting strategic insights delivered monthly.</p>
+
+            <div class="form-container fade-in">
                 <h3>Get Access to Digital Intel</h3>
                 <p>Monthly strategic insights delivered directly to your inbox</p>
-                
+
                 <div class="embed-container">
-                    <iframe 
-                        src="https://embeds.beehiiv.com/7405348a-fb60-4b95-8b7f-ac767daabab8" 
-                        data-test-id="beehiiv-embed" 
-                        frameborder="0" 
+                    <iframe
+                        src="https://embeds.beehiiv.com/7405348a-fb60-4b95-8b7f-ac767daabab8"
+                        data-test-id="beehiiv-embed"
+                        frameborder="0"
                         scrolling="no">
                     </iframe>
                 </div>
-                
+
                 <div class="trust-signals">
                     🔒 No spam. Unsubscribe anytime.
                 </div>
