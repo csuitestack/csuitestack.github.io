@@ -78,6 +78,9 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo-text {
@@ -85,6 +88,24 @@
             font-weight: 700;
             color: #22388a;
             text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #22388a;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #5c70a8;
         }
 
         /* Hero Section */
@@ -715,6 +736,10 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="#" class="logo-text">C-Suite Stack</a>
+            <div class="nav-links">
+                <a href="https://csuitestack.com/about/" class="nav-link">About</a>
+                <a href="https://csuitestack.com/contact/" class="nav-link">Get in Touch</a>
+            </div>
         </div>
     </nav>
 
